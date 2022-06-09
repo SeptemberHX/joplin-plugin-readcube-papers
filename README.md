@@ -39,9 +39,9 @@ How to get cookies:
 
 ### Coming soon
 
-- [ ] Colorful syntax support for quota in markdown [You need to install the [Enhancement](https://github.com/SeptemberHX/joplin-plugin-enhancement) plugin and enable the 'Colorful Blockquote' feature]
+- [x] Colorful syntax support for quota in markdown [You need to install the [Enhancement](https://github.com/SeptemberHX/joplin-plugin-enhancement) plugin and enable the 'Colorful Blockquote' feature]
   - [x] Allows `> [color=red] xxxx` so that the quota is rendered in different color (syntax from hackmd)
-  - [ ] Allows `> [name=SeptemberHX] xxx` so that the quota is rendered with a username to distinguish annotations from different users (syntax from hackmd)
+  - [x] Allows `> [name=SeptemberHX] xxx` so that the quota is rendered with a username to distinguish annotations from different users (syntax from hackmd)
   - [x] Render the annotations with the same colors in the Papers application
 - [ ] Insert paper figures directly into the note as attached resource files
   - papers published by specific publishers can be attached with all the figures as separate image files in ReadCuge Papers. We can allow users to download the figures and insert to the notes
