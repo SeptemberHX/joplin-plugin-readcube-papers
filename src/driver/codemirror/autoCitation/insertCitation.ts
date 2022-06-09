@@ -48,6 +48,7 @@ export default class InsertCitation {
 
     insertAnnotationCitations(options) {
         const annotations: AnnotationItem[] = options[0];
+        const enableEnhanced: boolean = options[1];
         const selections = this.doc.listSelections();
         if (!selections || selections.length == 0) {
             return;
@@ -58,7 +59,10 @@ export default class InsertCitation {
         for (const anno of annotations) {
             insertedText += '\n';
             if (anno.text && anno.text.length > 0) {
-                insertedText += `> [📜](https://www.readcube.com/library/${anno.item_id}#annotation:${anno.id}) ${anno.text.replace('\n', ' ')} [color=${colorMap[anno.color_id]}]`;
+                insertedText += `> [📜](https://www.readcube.com/library/${anno.item_id}#annotation:${anno.id}) ${anno.text.replace('\n', ' ')}`;
+                if (enableEnhanced) {
+                    insertedText += ` [color=${colorMap[anno.color_id]}][name=${anno.user_name}][date=${anno.modified}]`;
+                }
                 insertedText += '\n';
             }
 

@@ -5,7 +5,7 @@ import {AnnotationItem, PaperItem, PapersLib} from "./lib/papers/papersLib";
 import {getAllRecords, getPaperItemByNoteId, setupDatabase} from "./lib/papers/papersDB";
 import {buildCitationForItem, buildRefName, createNewNotesForPapers, syncAllPaperItems} from "./lib/papers/papersUtils";
 import {PapersWS} from "./lib/papers/papersWS";
-import {ENABLE_CUSTOM_STYLE, PAPERS_COOKIE} from "./common";
+import {ENABLE_CUSTOM_STYLE, ENABLE_ENHANCED_BLOCKQUOTE, PAPERS_COOKIE} from "./common";
 import {settings} from "./settings";
 
 joplin.plugins.register({
@@ -167,7 +167,7 @@ async function initPapers() {
 					}
 					await joplin.commands.execute('editor.execCommand', {
 						name: 'enhancement_insertAnnotation',
-						args: [[annos]]
+						args: [[annos, await joplin.settings.value(ENABLE_ENHANCED_BLOCKQUOTE)]]
 					});
 				} else {
 					await dialogs.open(copyErrHandle);

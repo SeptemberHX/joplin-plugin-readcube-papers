@@ -40,6 +40,8 @@ export type AnnotationItem = {
     color_id: number;
     page: number;
     item_id: string;  // collection_id:paper_id
+    user_name: string;
+    modified: string;
 }
 
 
@@ -140,7 +142,9 @@ class PapersLibTool {
                     note: anno.note ? anno.note : "",
                     color_id: anno.color_id,
                     page: anno.page_start,
-                    item_id: anno.item_id
+                    item_id: anno.item_id,
+                    user_name: anno.user_name,
+                    modified: anno.modified
                 });
             }
         }

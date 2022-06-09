@@ -5,6 +5,7 @@ export const PAPERS_NOTEID_TO_PAPERID_TITLE = 'papers.db';
 export const SOURCE_URL_PAPERS_PREFIX = 'papers_';
 export const SOURCE_URL_DIDA_PREFIX = 'dida_';
 export const ENABLE_CUSTOM_STYLE = 'PapersPluginEnableCustomStyle';
+export const ENABLE_ENHANCED_BLOCKQUOTE = 'PapersPluginEnableEnhancedQuote';
 
 export function extractInfo(data: string) {
     const splitResults = data.split(':');
