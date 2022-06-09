@@ -34,6 +34,31 @@ How to get cookies:
 2. Press F12 to open developer tools.
 3. Click any paper
 4. ![](./screenshot/paper_cookies.png)
+
+## Roadmap
+
+### Coming soon
+
+- [ ] Colorful syntax support for quota in markdown [You need to install the [Enhancement](https://github.com/SeptemberHX/joplin-plugin-enhancement) plugin and enable the 'Colorful Blockquote' feature]
+  - [x] Allows `> [color=red] xxxx` so that the quota is rendered in different color (syntax from hackmd)
+  - [ ] Allows `> [name=SeptemberHX] xxx` so that the quota is rendered with a username to distinguish annotations from different users (syntax from hackmd)
+  - [x] Render the annotations with the same colors in the Papers application
+- [ ] Insert paper figures directly into the note as attached resource files
+  - papers published by specific publishers can be attached with all the figures as separate image files in ReadCuge Papers. We can allow users to download the figures and insert to the notes
+  - However, only papers from some publishers can be provided with separate figure files. This feature cannot work for all papers.
+- [ ] Attach the text file that contains all the text in the paper pdf as attached resources in paper notes
+  - It allows users to search both the notes and the papers
+
+### Won't do
+
+1. anything related to annotating the papers in Joplin
+   1. for example: marginnote Like
+   2. please make full use of each professional tools to do the right thing
+2. save pdf as attached resource files
+   1. Joplin is pretty weak about the attachment management
+   2. The size of the Joplin notebook will grow significantly with too many pdf files, which is painful for syncing between multiple devices (however, the text file is really small)
+3. anything related to the ReadCube Papers' dimension feature
+
 ## Building the plugin
 
 The plugin is built using Webpack, which creates the compiled code in `/dist`. A JPL archive will also be created at the root, which can use to distribute the plugin.

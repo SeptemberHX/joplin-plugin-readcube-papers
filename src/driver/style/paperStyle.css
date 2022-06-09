@@ -15,7 +15,7 @@ body {
 
 /* blockquote */
 blockquote {
-    border-left: 4px solid #0087ed !important;
+    border-left: 4px solid #0087ed;
     border-radius: 2px;
 }
 

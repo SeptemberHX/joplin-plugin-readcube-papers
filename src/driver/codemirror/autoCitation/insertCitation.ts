@@ -1,5 +1,15 @@
 import {AnnotationItem} from "../../../lib/papers/papersLib";
 
+const colorMap = {
+    1: '#ffd638',
+    2: '#94ed96',
+    3: '#feb6c1',
+    4: '#dba1da',
+    5: '#fe0013',
+    6: '#001df8',
+    7: '#ffa42c'
+};
+
 export default class InsertCitation {
     constructor(private readonly editor) {}
     private readonly doc = this.editor.getDoc();
@@ -48,7 +58,7 @@ export default class InsertCitation {
         for (const anno of annotations) {
             insertedText += '\n';
             if (anno.text && anno.text.length > 0) {
-                insertedText += `> [📜](https://www.readcube.com/library/${anno.item_id}#annotation:${anno.id}) ${anno.text.replace('\n', ' ')}`;
+                insertedText += `> [📜](https://www.readcube.com/library/${anno.item_id}#annotation:${anno.id}) ${anno.text.replace('\n', ' ')} [color=${colorMap[anno.color_id]}]`;
                 insertedText += '\n';
             }
 
