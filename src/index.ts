@@ -2,7 +2,7 @@ import joplin from 'api';
 import {ContentScriptType, MenuItem, MenuItemLocation, ToolbarButtonLocation} from "../api/types";
 import {selectAnnotationPopup, selectPapersPopup} from "./ui/citation-popup";
 import {AnnotationItem, PaperItem, PapersLib} from "./lib/papers/papersLib";
-import {getAllRecords, getPaperItemByNoteId, setupDatabase} from "./lib/papers/papersDB";
+import {getAllRecords, getPaperItemByNoteIdOrTitle, setupDatabase} from "./lib/papers/papersDB";
 import {buildCitationForItem, buildRefName, createNewNotesForPapers, syncAllPaperItems} from "./lib/papers/papersUtils";
 import {PapersWS} from "./lib/papers/papersWS";
 import {ENABLE_CUSTOM_STYLE, ENABLE_ENHANCED_BLOCKQUOTE, PAPERS_COOKIE} from "./common";
@@ -40,7 +40,7 @@ async function initPapers() {
 		async () => {
 			const currNote = await joplin.workspace.selectedNote();
 			if (currNote) {
-				return await getPaperItemByNoteId(currNote.id);
+				return await getPaperItemByNoteIdOrTitle(currNote.id, currNote.title);
 			}
 			return undefined;
 		}
@@ -152,7 +152,7 @@ async function initPapers() {
 		execute: async () => {
 			const currNote = await joplin.workspace.selectedNote();
 			if (currNote) {
-				const paper = await getPaperItemByNoteId(currNote.id);
+				const paper = await getPaperItemByNoteIdOrTitle(currNote.id, currNote.title);
 				if (paper) {
 					const annotations: AnnotationItem[] = await PapersLib.getAnnotation(paper.collection_id, paper.id);
 					let annoId2Anno = {};

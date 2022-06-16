@@ -2,8 +2,7 @@
 
 import joplin from "api";
 import {PaperItem} from "./papersLib";
-import {getOrCreatePaperRootFolder} from "./papersUtils";
-import {extractInfo, PAPERS_NOTEID_TO_PAPERID_TITLE, SOURCE_URL_PAPERS_PREFIX} from "../../common";
+import {extractInfo, SOURCE_URL_PAPERS_PREFIX} from "../../common";
 
 const fs = joplin.require('fs-extra')
 const sqlite3 = joplin.require('sqlite3')
@@ -116,6 +115,15 @@ export async function getRecord(id): Promise<PaperItem>{
     return getRecordAsPaperItem(record)
 }
 
+export async function getRecordByTitle(title): Promise<PaperItem> {
+    const records = await runQuery('all', `SELECT * FROM papers WHERE title = $title`, {$title: title})
+    if (records) {
+        return getRecordAsPaperItem(records[0])
+    } else {
+        return null;
+    }
+}
+
 export async function deleteRecord(id){
     await runQuery('run', `DELETE FROM papers WHERE id = $id`, {$id: id})
 }
@@ -185,13 +193,13 @@ export async function getNoteId2PaperId() {
     return results;
 }
 
-export async function getPaperItemByNoteId(noteId: string) {
+export async function getPaperItemByNoteIdOrTitle(noteId: string, title: string) {
     let note = await joplin.data.get(['notes', noteId], {
         fields: ['source_url', 'id']
     });
 
     if (!note || !note.source_url.includes(SOURCE_URL_PAPERS_PREFIX)) {
-        return undefined;
+        return getRecordByTitle(title);
     }
     return await getRecord(extractInfo(note.source_url)[SOURCE_URL_PAPERS_PREFIX]);
 }

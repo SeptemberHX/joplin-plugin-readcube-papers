@@ -18,7 +18,7 @@ export default class InsertCitation {
         const itemCitations: string[] = options[0];
         const itemRefNames: string[] = options[1];
         const selections = this.doc.listSelections();
-        if (!selections || selections.length == 0) {
+        if (itemCitations.length == 0 || !selections || selections.length == 0) {
             return;
         }
         const currSelection = selections[0];
@@ -50,7 +50,7 @@ export default class InsertCitation {
         const annotations: AnnotationItem[] = options[0];
         const enableEnhanced: boolean = options[1];
         const selections = this.doc.listSelections();
-        if (!selections || selections.length == 0) {
+        if (annotations.length == 0 || !selections || selections.length == 0) {
             return;
         }
         const currSelection = selections[0];
