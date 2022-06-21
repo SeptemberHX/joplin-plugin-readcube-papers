@@ -10,7 +10,9 @@ module.exports = {
                     CodeMirror.defineExtension('enhancement_insertAnnotation', commandBridge.insertAnnotationCitations.bind(commandBridge));
                 });
             },
-            codeMirrorOptions: { 'enhancement_autoCitation': true },
+            codeMirrorOptions: {
+                'enhancement_autoCitation': true,
+            },
             assets: function() {
                 return [ ];
             }
