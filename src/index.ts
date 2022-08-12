@@ -5,7 +5,7 @@ import {AnnotationItem, PaperItem, PapersLib} from "./lib/papers/papersLib";
 import {getAllRecords, getPaperItemByNoteIdOrTitle, getRecord, setupDatabase} from "./lib/papers/papersDB";
 import {
 	appendPaperBlockIfMissing,
-	buildCitationForItem,
+	buildCitationForItem, buildPaperUrl,
 	buildRefName,
 	createNewNotesForPapers,
 	syncAllPaperItems
@@ -57,9 +57,17 @@ async function initPapers() {
 
 	await joplin.contentScripts.onMessage(
 		'enhancement_editor_paper_render',
-		async (paperItemId) => {
-			console.log(paperItemId);
-			return await getRecord(paperItemId);
+		async (msg) => {
+			switch (msg.type) {
+				case 'queryPaper':
+					return await getRecord(msg.content);
+				case 'openPaper':
+					const paperItem = await getRecord(msg.content);
+					await joplin.commands.execute('openItem', buildPaperUrl(paperItem.collection_id, paperItem.id));
+					break;
+				default:
+					break;
+			}
 		}
 	)
 

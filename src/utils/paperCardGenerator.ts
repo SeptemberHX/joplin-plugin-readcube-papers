@@ -1,28 +1,29 @@
 import {PaperItem} from "../lib/papers/papersLib";
 
 export function buildPaperCard(item: PaperItem, options) {
-    let stars = '☆☆☆☆☆';
-    switch (item.rating) {
-        case 1:
-            stars = '★☆☆☆☆';
-            break;
-        case 2:
-            stars = '★★☆☆☆';
-            break;
-        case 3:
-            stars = '★★★☆☆';
-            break;
-        case 4:
-            stars = '★★★★☆';
-            break;
-        case 5:
-            stars = '★★★★★';
-            break;
-        default:
-            break;
-    }
+    if (item) {
+        let stars = '☆☆☆☆☆';
+        switch (item.rating) {
+            case 1:
+                stars = '★☆☆☆☆';
+                break;
+            case 2:
+                stars = '★★☆☆☆';
+                break;
+            case 3:
+                stars = '★★★☆☆';
+                break;
+            case 4:
+                stars = '★★★★☆';
+                break;
+            case 5:
+                stars = '★★★★★';
+                break;
+            default:
+                break;
+        }
 
-    return `<table class="paper_tg">
+        return `<table class="paper_tg">
 <thead>
   <tr>
     <th class="paper_tg_title" colspan="4"><a href="https://www.readcube.com/library/${item.collection_id}:${item.id}">${item.title}</a></th>
@@ -47,4 +48,7 @@ export function buildPaperCard(item: PaperItem, options) {
 </tbody>
 </table>
 `
+    } else {
+        return `<div style="color: red;">Paper does not exist.<br>Please check your paper id.</div>`
+    }
 }

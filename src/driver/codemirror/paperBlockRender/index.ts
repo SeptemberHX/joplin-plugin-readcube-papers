@@ -20,7 +20,7 @@ module.exports = {
 
                         const idMatch = PAPER_ID_REG.exec(content);
                         if (idMatch) {
-                            _context.postMessage(idMatch[1]).then((item) => {
+                            _context.postMessage({type: 'queryPaper', content: idMatch[1]}).then((item) => {
                                 divElement.innerHTML = buildPaperCard(item, null);
                                 const lineWidget = findLineWidgetAtLine(cm, toLine, ENHANCEMENT_PAPER_BLOCK_SPAN_MARKER_CLASS + '-line-widget');
                                 if (lineWidget) {
@@ -37,7 +37,15 @@ module.exports = {
                         span.textContent = '===> Folded Papers Block <===';
                         span.style.cssText = 'color: lightgray; font-size: smaller; font-style: italic;';
                         return span;
-                    }, ENHANCEMENT_PAPER_BLOCK_SPAN_MARKER_CLASS, true, false);
+                    }, ENHANCEMENT_PAPER_BLOCK_SPAN_MARKER_CLASS, true, false, null, (content, e) => {
+                        const match = PAPER_ID_REG.exec(content);
+                        if (match) {
+                            _context.postMessage({
+                                type: 'openPaper',
+                                content: match[1]
+                            });
+                        }
+                    });
 
                     cm.on('renderLine', (editor, line: LineHandle, element: Element) => {
                         if (element.getElementsByClassName(ENHANCEMENT_PAPER_BLOCK_SPAN_MARKER_CLASS).length > 0) {

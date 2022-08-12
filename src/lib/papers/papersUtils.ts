@@ -105,7 +105,7 @@ export async function buildRefName(item: PaperItem) {
 async function buildCitation(title, authors, from, volume, page, year, itemId, collectionId) {
     let showText = "";
     showText += authors.slice(0, authors.length - 1).join(', ') + `, and ${authors[authors.length - 1]}.`;
-    showText += ` "[${title}](https://www.readcube.com/library/${collectionId}:${itemId})."`;
+    showText += ` "[${title}](${buildPaperUrl(collectionId, itemId)})."`;
 
     if (from.length > 0) {
         showText += ` In *${from}*.`;
@@ -209,4 +209,8 @@ function createPaperBlockContent(paperItem: PaperItem) {
 \`\`\`paper
 id: ${paperItem.id}
 \`\`\``
+}
+
+export function buildPaperUrl(collectionId, itemId) {
+    return `https://www.readcube.com/library/${collectionId}:${itemId}`;
 }
