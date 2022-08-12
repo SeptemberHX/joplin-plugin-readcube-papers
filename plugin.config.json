@@ -2,6 +2,7 @@
 	"extraScripts": [
 		"driver/codemirror/autoCitation/index.ts",
 		"driver/markdownItRenderer/paperFence/index.ts",
-		"driver/style/index.ts"
+		"driver/style/index.ts",
+		"driver/codemirror/paperBlockRender/index.ts"
 	]
 }

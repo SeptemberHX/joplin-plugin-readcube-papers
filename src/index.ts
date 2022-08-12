@@ -2,7 +2,7 @@ import joplin from 'api';
 import {ContentScriptType, MenuItem, MenuItemLocation, ToolbarButtonLocation} from "../api/types";
 import {selectAnnotationPopup, selectPapersPopup} from "./ui/citation-popup";
 import {AnnotationItem, PaperItem, PapersLib} from "./lib/papers/papersLib";
-import {getAllRecords, getPaperItemByNoteIdOrTitle, setupDatabase} from "./lib/papers/papersDB";
+import {getAllRecords, getPaperItemByNoteIdOrTitle, getRecord, setupDatabase} from "./lib/papers/papersDB";
 import {buildCitationForItem, buildRefName, createNewNotesForPapers, syncAllPaperItems} from "./lib/papers/papersUtils";
 import {PapersWS} from "./lib/papers/papersWS";
 import {ENABLE_CUSTOM_STYLE, ENABLE_ENHANCED_BLOCKQUOTE, PAPERS_COOKIE} from "./common";
@@ -14,6 +14,13 @@ joplin.plugins.register({
 		const enableCustomStyle = await joplin.settings.value(ENABLE_CUSTOM_STYLE);
 
 		await initPapers();
+
+		await joplin.contentScripts.register(
+			ContentScriptType.CodeMirrorPlugin,
+			'enhancement_editor_paper_render',
+			'./driver/codemirror/paperBlockRender/index.js'
+		);
+
 		if (enableCustomStyle) {
 			await joplin.contentScripts.register(
 				ContentScriptType.MarkdownItPlugin,
@@ -37,14 +44,18 @@ async function initPapers() {
 
 	await joplin.contentScripts.onMessage(
 		'enhancement_paper_fence_renderer',
-		async () => {
-			const currNote = await joplin.workspace.selectedNote();
-			if (currNote) {
-				return await getPaperItemByNoteIdOrTitle(currNote.id, currNote.title);
-			}
-			return undefined;
+		async (itemId) => {
+			return await getRecord(itemId);
 		}
 	);
+
+	await joplin.contentScripts.onMessage(
+		'enhancement_editor_paper_render',
+		async (paperItemId) => {
+			console.log(paperItemId);
+			return await getRecord(paperItemId);
+		}
+	)
 
 	const dialogs = joplin.views.dialogs;
 	const beforeHandle = await dialogs.create('BeforeSyncDialog');
