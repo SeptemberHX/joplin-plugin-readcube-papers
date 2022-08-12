@@ -1,5 +1,4 @@
 import {PAPER_ID_REG} from "../../../utils/reg";
-import {getRecord} from "../../../lib/papers/papersDB";
 
 export default function (context) {
     return {

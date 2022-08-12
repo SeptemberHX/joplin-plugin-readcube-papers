@@ -30,7 +30,8 @@
     word-break: normal;
 }
 
-.enhancement-paper-block-marker-line-widget .paper_tg th a {
+.enhancement-paper-block-marker-line-widget .paper_tg th a,
+.enhancement-paper-block-marker-line-widget td i {
     font-family: Times New Roman, serif !important;
 }
 

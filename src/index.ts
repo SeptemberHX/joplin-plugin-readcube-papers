@@ -3,7 +3,13 @@ import {ContentScriptType, MenuItem, MenuItemLocation, ToolbarButtonLocation} fr
 import {selectAnnotationPopup, selectPapersPopup} from "./ui/citation-popup";
 import {AnnotationItem, PaperItem, PapersLib} from "./lib/papers/papersLib";
 import {getAllRecords, getPaperItemByNoteIdOrTitle, getRecord, setupDatabase} from "./lib/papers/papersDB";
-import {buildCitationForItem, buildRefName, createNewNotesForPapers, syncAllPaperItems} from "./lib/papers/papersUtils";
+import {
+	appendPaperBlockIfMissing,
+	buildCitationForItem,
+	buildRefName,
+	createNewNotesForPapers,
+	syncAllPaperItems
+} from "./lib/papers/papersUtils";
 import {PapersWS} from "./lib/papers/papersWS";
 import {ENABLE_CUSTOM_STYLE, ENABLE_ENHANCED_BLOCKQUOTE, PAPERS_COOKIE} from "./common";
 import {settings} from "./settings";
@@ -132,6 +138,15 @@ async function initPapers() {
 	});
 
 	await joplin.commands.register({
+		name: 'enhancement_append_paper_block',
+		label: 'Fix missing paper code blocks',
+		iconName: 'fa fa-tools',
+		execute: async () => {
+			await appendPaperBlockIfMissing();
+		}
+	})
+
+	await joplin.commands.register({
 		name: 'enhancement_cite_papers',
 		label: 'Cite your papers',
 		iconName: 'fa fa-graduation-cap',
@@ -196,8 +211,12 @@ async function initPapers() {
 			commandName: 'enhancement_papers_createNoteForPaper',
 			label: 'Create notes for papers'
 		},
+		{
+			commandName: 'enhancement_append_paper_block',
+			label: 'Fix missing paper blocks'
+		}
 	];
-	await joplin.views.menus.create('enhancementToolMenu', 'Enhancement', commandsSubMenu, MenuItemLocation.Tools);
+	await joplin.views.menus.create('enhancementToolMenu', 'ReadCube Papers', commandsSubMenu, MenuItemLocation.Tools);
 
 	await joplin.views.toolbarButtons.create(
 		'enhancementCitePapers',

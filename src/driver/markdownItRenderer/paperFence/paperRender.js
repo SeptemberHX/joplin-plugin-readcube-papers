@@ -62,9 +62,8 @@ function loadPaperDetail() {
     for (const div of paperRenderDivs) {
         webviewApi.postMessage("enhancement_paper_fence_renderer", div.textContent).then(item => {
             if (item) {
-                const html = generateBodyForPaperFence(item.title, item.authors, item.journal, item.tags, item.rating,
+                div.innerHTML = generateBodyForPaperFence(item.title, item.authors, item.journal, item.tags, item.rating,
                     item.abstract, item.collection_id, item.id, item.year, item.page, item.volume, item.notes);
-                div.innerHTML = html;
             }
         });
     }
