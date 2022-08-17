@@ -17,7 +17,7 @@ This plugin supports:
 
 > Dialog UI code from [joplin/plugin-bibtex.git](https://github.com/joplin/plugin-bibtex.git)
 
-![](./screenshot/readcube.png)
+![Imgur](https://i.imgur.com/lqWRkwG.gif)
 
 ![img](https://i.imgur.com/Acri6uW.gif)
 
@@ -25,9 +25,10 @@ This plugin supports:
 
 How to use:
 1. In the Joplin Settings -> Joplin Enhancement -> Set your cookie for Papers
-2. ~~Joplin Menubar -> Tools -> Sync files with Papers: It will create notes for your papers without the annotations~~
+2. ~~`Tools -> ReadCube Papers -> Sync files with Papers`: It will create notes for your papers without the annotations~~
     1. Not needed anymore. Now it will fetch the papers and keep syncing based on websocket
-3. 'Tools -> Create notes for papers'. **Only the notes created in this way can have a rendered paper information table**
+3. `Tools -> ReadCube Papers -> Create notes for papers`. **Only the notes created in this way can have a rendered paper information table**
+4. `Tools -> ReadCube Papers -> Fix missing paper code blocks` => Automatically insert the paper code block for the nodes under `ReadCube Papers/XXXX` folders when the block is missing. It should be helpful when you upgrade the plugin from old versions.
 
 How to get cookies:
 1. Open your browser, go to your Papers Library
