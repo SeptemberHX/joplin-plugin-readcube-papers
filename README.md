@@ -35,6 +35,13 @@ How to get cookies:
 3. Click any paper
 4. ![](./screenshot/paper_cookies.png)
 
+
+**The copied cookie should look like:**
+
+```cookies
+_readcube_session=XXXXXXX; user_web_token=XXXXXXX; _redcube-login_token=XXXXXXX
+```
+
 ## Roadmap
 
 ### Coming soon
