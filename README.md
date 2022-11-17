@@ -1,5 +1,11 @@
 ## ReadCube Papers
 
+
+### This plugin is merged to [joplin-plugin-bundle](https://github.com/SeptemberHX/joplin-plugin-bundle)
+
+---
+
+
 > 使用到的 API 接口说明见：[ReadCube Papers API](https://blog.hxgpark.com/posts/ReadCubePapersAPI/)
 
 ReadCube Papers is a reference manager: [Official website](https://www.papersapp.com/).
